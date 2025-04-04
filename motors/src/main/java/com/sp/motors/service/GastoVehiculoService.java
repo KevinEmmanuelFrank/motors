@@ -14,10 +14,12 @@ public class GastoVehiculoService {
     private GastoVehiculoRepository gastoVehiculoRepository;
 
     public List<GastoVehiculo> getAllGastos() {
+
         return gastoVehiculoRepository.findAll();
     }
 
     public GastoVehiculo getGastoById(Long Id) {
+
         return gastoVehiculoRepository.findById(Id).orElse(null);
     }
 
@@ -26,10 +28,12 @@ public class GastoVehiculoService {
     }
 
     public GastoVehiculo actualizarGasto(GastoVehiculo gasto) {
+
         return gastoVehiculoRepository.save(gasto);
     }
 
     public void borrarGasto(Long Id) {
+
         gastoVehiculoRepository.deleteById(Id);
     }
 }

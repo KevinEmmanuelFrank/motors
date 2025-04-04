@@ -15,22 +15,27 @@ public class TallerMecanicoService {
     private TallerMecanicoRepository tallerMecanicoRepository;
 
     public List<TallerMecanico> getAllTalleres() {
+
         return tallerMecanicoRepository.findAll();
     }
 
     public TallerMecanico getTallerById(Long Id) {
+
         return tallerMecanicoRepository.findById(Id).orElse(null);
     }
 
     public TallerMecanico crearTaller(TallerMecanico taller) {
+
         return tallerMecanicoRepository.save(taller);
     }
 
     public TallerMecanico actualizarTaller(TallerMecanico taller) {
+
         return tallerMecanicoRepository.save(taller);
     }
 
     public void borrarTaller(Long Id) {
+
         tallerMecanicoRepository.deleteById(Id);
     }
 
