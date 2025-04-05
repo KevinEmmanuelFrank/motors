@@ -14,11 +14,13 @@ public class AutoController {
 
     @GetMapping("/{id}")
     public Auto getAutoById(@PathVariable Long id) {
+
         return autoService.getAutoById(id);
     }
 
     @PostMapping
     public Auto crearAuto(@RequestBody Auto auto) {
+
         return autoService.crearAuto(auto);
     }
 
