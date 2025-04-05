@@ -1,8 +1,7 @@
 package com.sp.motors.model;
 
-import com.sp.motors.dto.TallerMecanico_Gasto;
 import jakarta.persistence.*;
-import lombok.Data;
+        import lombok.Data;
 
 import java.util.List;
 
@@ -39,7 +38,12 @@ public class TallerMecanico {
     @Column(nullable = false)
     private Long telefono;
 
-    @OneToMany(mappedBy = "taller")
-    private List<TallerMecanico_Gasto> gasto;
+    @ManyToMany
+    @JoinTable(
+            name = "taller_gasto", // nombre de la tabla intermedia
+            joinColumns = @JoinColumn(name = "taller_id"),
+            inverseJoinColumns = @JoinColumn(name = "gasto_id")
+    )
+    private List<GastoVehiculo> gastos;
 
 }

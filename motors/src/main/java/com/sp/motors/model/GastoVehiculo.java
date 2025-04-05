@@ -1,6 +1,5 @@
 package com.sp.motors.model;
 
-import com.sp.motors.dto.TallerMecanico_Gasto;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -31,7 +30,6 @@ public class GastoVehiculo {
     @Column
     private LocalDate fechaDeEntrega;
 
-    @OneToMany(mappedBy = "gasto")
-    private List<TallerMecanico_Gasto> taller;
-
+    @ManyToMany(mappedBy = "gastos")
+    private List<TallerMecanico> talleres;
 }
