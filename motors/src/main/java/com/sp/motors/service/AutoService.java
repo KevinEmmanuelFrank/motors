@@ -2,40 +2,25 @@ package com.sp.motors.service;
 
 
 import com.sp.motors.model.Auto;
-import com.sp.motors.repository.AutoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class AutoService {
+public interface AutoService {
 
-    @Autowired
-    private AutoRepository autoRepository;
+    List<Auto> getAllAutos();
 
-    public List<Auto> getAllAutos() {
+    Optional<Auto> getAutoById(Long Id);
 
-        return autoRepository.findAll();
-    }
+    Auto crearAuto(Auto auto);
 
-    public Auto getAutoById(Long Id) {
+    Optional<Auto> actualizarAuto(Long id, Auto autoDetails);
 
-        return autoRepository.findById(Id).orElse(null);
-    }
+    boolean borrarAuto(Long id);
 
-    public Auto crearAuto(Auto auto) {
-
-        return autoRepository.save(auto);
-    }
-
-    public Auto actualizarAuto(Auto auto) {
-
-        return autoRepository.save(auto);
-    }
-
-    public void borrarAuto(Long Id) {
-
-        autoRepository.deleteById(Id);
-    }
+    @Transactional
+    List<Auto> buscarPorMarcaOModello(String filtro);
 }
