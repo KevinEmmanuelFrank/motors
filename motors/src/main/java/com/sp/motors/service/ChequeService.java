@@ -15,17 +15,20 @@ public class ChequeService implements IChequeService{
     private final ChequeRepository chequeRepository;
 
     public ChequeService(ChequeRepository chequeRepository) {
+
         this.chequeRepository = chequeRepository;
     }
 
     @Override
     public List<Cheque> listarTodos() {
+
         return chequeRepository.findAll();
     }
 
     @Override
     @Transactional(readOnly = true)
     public Optional<Cheque> buscarPorId(Long id) {
+
         return chequeRepository.findById(id);
     }
 
