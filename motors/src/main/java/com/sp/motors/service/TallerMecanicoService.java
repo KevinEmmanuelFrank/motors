@@ -1,42 +1,22 @@
+// src/main/java/com/sp/motors/service/TallerMecanicoService.java
 package com.sp.motors.service;
 
-
 import com.sp.motors.model.TallerMecanico;
-import com.sp.motors.repository.TallerMecanicoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Optional;
 
-@Service
-public class TallerMecanicoService {
+public interface TallerMecanicoService {
 
-    @Autowired
-    private TallerMecanicoRepository tallerMecanicoRepository;
+    List<TallerMecanico> getAllTalleres();
 
-    public List<TallerMecanico> getAllTalleres() {
+    Optional<TallerMecanico> getTallerById(Long id);
 
-        return tallerMecanicoRepository.findAll();
-    }
+    TallerMecanico crearTaller(TallerMecanico taller);
 
-    public TallerMecanico getTallerById(Long Id) {
+    Optional<TallerMecanico> actualizarTaller(Long id, TallerMecanico tallerDetails);
 
-        return tallerMecanicoRepository.findById(Id).orElse(null);
-    }
+    boolean borrarTaller(Long id);
 
-    public TallerMecanico crearTaller(TallerMecanico taller) {
 
-        return tallerMecanicoRepository.save(taller);
-    }
-
-    public TallerMecanico actualizarTaller(TallerMecanico taller) {
-
-        return tallerMecanicoRepository.save(taller);
-    }
-
-    public void borrarTaller(Long Id) {
-
-        tallerMecanicoRepository.deleteById(Id);
-    }
-
+    List<TallerMecanico> buscarPorNombre(String filtro);
 }
