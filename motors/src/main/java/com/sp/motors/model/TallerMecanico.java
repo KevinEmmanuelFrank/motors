@@ -1,9 +1,7 @@
 package com.sp.motors.model;
 
-import com.sp.motors.dto.TallerMecanico_Gasto;
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.util.List;
 
 @Data
@@ -13,7 +11,7 @@ public class TallerMecanico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false)
     private String nombre;
@@ -21,8 +19,8 @@ public class TallerMecanico {
     @Column(nullable = false)
     private String apellido;
 
-    @Column(nullable = false)
-    private String nombre_taller;
+    @Column(nullable = false, name = "nombre_taller")
+    private String nombreTaller;
 
     @Column(nullable = false)
     private String domicilio;
@@ -30,7 +28,7 @@ public class TallerMecanico {
     @Column(nullable = false)
     private String email;
 
-    @Column
+    @Column(length = 500)
     private String descripcion;
 
     @Column
@@ -39,7 +37,12 @@ public class TallerMecanico {
     @Column(nullable = false)
     private Long telefono;
 
-    @OneToMany(mappedBy = "taller")
-    private List<TallerMecanico_Gasto> gasto;
+    @ManyToMany
+    @JoinTable(
+            name = "taller_gasto", // nombre de la tabla intermedia
+            joinColumns = @JoinColumn(name = "taller_id"),
+            inverseJoinColumns = @JoinColumn(name = "gasto_id")
+    )
+    private List<GastoVehiculo> gastos;
 
 }

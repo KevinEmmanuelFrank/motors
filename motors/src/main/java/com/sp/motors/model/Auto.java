@@ -3,6 +3,8 @@ package com.sp.motors.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 @Table(name = "Autos")
@@ -11,7 +13,7 @@ public class Auto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
+    private Long id;
 
     @Column(nullable = false)
     private String marca;
@@ -19,10 +21,10 @@ public class Auto {
     @Column(nullable = false)
     private String color;
 
+    @Column
+    private Integer anio;
 
-    private String anio;
-
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String cedula;
 
     @Column(nullable = false)
@@ -35,39 +37,44 @@ public class Auto {
     private boolean oKm;
 
     @Column(nullable = false)
-    private String kilometros;
+    private Integer kilometros;
 
-    @Column
+    @Column(length = 500)
     private String descripcion;
 
-    @Column
-    private Double precioEntrada;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal precioEntrada;
 
-    @Column
-    private Double precioEntradaConGastos;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal precioEntradaConGastos;
 
-    @Column
-    private Double precioSalida;
-
-    @Enumerated(EnumType.STRING)
-    private transmision transmision;
+    @Column(precision = 10, scale = 2)
+    private BigDecimal precioSalida;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private Transmision transmision;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Puertas puertas;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Combustible combustible;
 
-    public enum transmision {
+    public enum Transmision {
         AUTOMATICA, SEMIAUTOMATICA, MANUAL
     }
 
     public enum Puertas {
-        UNA, DOS, TRES, CUATRO, CINCO, SEIS
+
+        DOS, TRES, CUATRO, CINCO
+
     }
 
     public enum Combustible {
-        GASOLINA, DIESEL, ELECTRICO
+        GASOLINA, DIESEL, ELECTRICO, HIBRIDO
     }
 
 }
