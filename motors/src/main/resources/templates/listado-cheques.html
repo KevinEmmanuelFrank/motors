@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${pageTitle}"></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+    <h1 th:text="${pageTitle}" class="mb-4"></h1>
+    <a th:href="@{/cheques/crear}" class="btn btn-success mb-3">Crear Nuevo Cheque</a>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Fecha de Emisión</th>
+            <th>Destinatario</th>
+            <th>Importe</th>
+            <th>Banco</th>
+            <th>Fecha de Vencimiento</th>
+            <th>Fecha de Depósito</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cheque : ${cheques}">
+            <td th:text="${cheque.id}"></td>
+            <td th:text="${#dates.format(cheque.fechaEmision, 'yyyy-MM-dd')}"></td>
+            <td th:text="${cheque.idCliente}"></td>
+            <td th:text="${#numbers.formatCurrency(cheque.importe)}"></td>
+            <td th:text="${cheque.banco}"></td>
+            <td th:text="${#dates.format(cheque.fechaVencimiento, 'yyyy-MM-dd')}"></td>
+            <td th:text="${#dates.format(cheque.fechaDeposito, 'yyyy-MM-dd')}"></td>
+            <td th:text="${cheque.estado.displayName}"></td>
+            <td>
+                <a th:href="@{/cheques/editar/${cheque.id}}" class="btn btn-sm btn-primary">Editar</a>
+                <a th:href="@{/cheques/eliminar/${cheque.id}}" class="btn btn-sm btn-danger ml-1"
+                   onclick="return confirm('¿Estás seguro de eliminar este cheque?')">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

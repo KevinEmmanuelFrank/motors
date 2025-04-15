@@ -36,6 +36,7 @@ public class AutoController {
     }
 
     @GetMapping("/{id}")
+
     public String mostrarAuto(@PathVariable Long id, Model model) {
         Optional<Auto> autoOpt = autoService.getAutoById(id);
         if (autoOpt.isPresent()) {
@@ -52,6 +53,7 @@ public class AutoController {
         autoService.borrarAuto(id);
         redirectAttributes.addFlashAttribute("mensaje", "Auto eliminado correctamente.");
         return "redirect:/autos";
+
     }
 
 

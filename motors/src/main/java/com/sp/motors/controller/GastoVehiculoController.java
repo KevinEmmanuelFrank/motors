@@ -14,11 +14,13 @@ public class GastoVehiculoController {
 
     @GetMapping("/{id}")
     public GastoVehiculo getGastoById(@PathVariable Long id) {
+
         return gastoVehiculoService.getGastoById(id);
     }
 
     @PostMapping
     public GastoVehiculo crearGasto(@RequestBody GastoVehiculo gasto) {
+
         return gastoVehiculoService.crearGasto(gasto);
     }
 
